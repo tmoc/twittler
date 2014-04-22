@@ -1,0 +1,76 @@
+body {
+  margin: 0;
+  font-family: Helvetica, sans-serif;
+}
+.header {
+  height: 90px;
+  width: 100%;
+  background-color: #ddd;
+}
+.logo {
+	width: 400px;
+	margin: 0 auto;
+}
+.logo p {
+	text-align: center;
+	font-size: 28px;
+	padding-top: 30px;
+	margin: 0 auto;
+	color: #00B060;
+}
+.content {
+  height: 600px;
+  width: 100%;
+}
+.tweet_container {
+	margin: 0 auto;
+	padding-top: 30px;
+	width: 960px;
+}
+.home_tweets_container {
+	width: 460px;
+	float: left;
+}
+.user_tweets_container {
+	width: 460px;
+	float: left;
+	margin-left: 40px;
+}
+.user_tweets {
+	height: 430px;
+	overflow: scroll;
+}
+.user_stream_title {
+  font-weight: bold;
+}
+.clear {
+	margin: 0 auto;
+	cursor: pointer;
+	cursor: hand;
+}
+.content ul {
+	padding-left: 0;
+}
+.content li {
+  list-style-type: none;
+  padding-bottom: 8px;
+}
+.created_at {
+	font-size: 12px;
+	font-style: italic;
+}
+.footer {
+  position: fixed;
+  bottom: 0;
+  height: 45px;
+  width: 100%;
+  background-color: #ddd;
+}
+.home_tweets .user {
+  color: #00733E;
+  cursor: pointer;
+  cursor: hand;
+}
+.user_tweets .user {
+  color: #00733E;
+}
