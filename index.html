@@ -25,7 +25,7 @@
     <div class="footer"></div>
 
     <script>
-    // Works by maintaining a history of tweets. If a user's name is clicked, the
+    // Works by maintaining a cache of jQuery wrapped tweet elements (tweet_history). If a user's name is clicked, the
     // user's tweets are filtered from the history array and displayed.
 
     // Sorry about the spaghetti code, I'm looking forward to learning a good framework
@@ -78,7 +78,7 @@
           var $title = $('<p class="user_stream_title">' + user + '\'s tweet history</p>');
           var $clear_button = $('<input type="submit" value="Clear" class="clear"></input>');
           var $tweet_list = $('<ul class="user_tweets"></ul>');
-          var tweet_user;
+          var tweet_history_user;
           var i;
 
           $clear_button.click(function () {$('.user_tweets_container').empty(); });
@@ -90,8 +90,8 @@
           $('.user_tweets_container').append($tweet_list);
           
           for (i = 0; i < tweet_history.length; i += 1) {
-            tweet_user = $(tweet_history[i]).find('.user').text();
-            if (tweet_user === user) {
+            tweet_history_user = $(tweet_history[i]).find('.user').text();
+            if (tweet_history_user === user) {
               tweet_history[i].clone().appendTo($tweet_list);
             }
           }
@@ -107,6 +107,7 @@
         // them without refactoring a lot of my code. 
         $('.tweetsubmit').click(function () {
           var tweet = {};
+
           tweet.user = username;
           tweet.message = $('.tweet_box').val();
           tweet.created_at = moment().format('MMMM Do YYYY, h:mm:ss a');
@@ -118,14 +119,15 @@
         $('.tweet_box').keypress(function (event) {
           var key = event.which;
           var tweet;
+
           if (key === 13) { 
-          tweet = {};
-          tweet.user = username;
-          tweet.message = $('.tweet_box').val();
-          tweet.created_at = moment().format('MMMM Do YYYY, h:mm:ss a');
-          streams.users[username].push(tweet);
-          streams.home.push(tweet);
-          $('.tweet_box').val('');
+            tweet = {};
+            tweet.user = username;
+            tweet.message = $('.tweet_box').val();
+            tweet.created_at = moment().format('MMMM Do YYYY, h:mm:ss a');
+            streams.users[username].push(tweet);
+            streams.home.push(tweet);
+            $('.tweet_box').val('');
           }
         });
 
