@@ -2,6 +2,7 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="moment.min.js"></script>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
   </head>
@@ -24,12 +25,19 @@
     <div class="footer"></div>
 
     <script>
+    // Works by maintaining a history of tweets. If a user's name is clicked, the
+    // user's tweets are filtered from the history array and displayed.
+
+    // Sorry about the spaghetti code, I'm looking forward to learning a good framework
+    // for this kind of thing.
 
       $(document).ready(function(){
         var getTweets;
         var showUserTweets;
         var tweet_history = [];
         var stream_index = 0;
+        var username = prompt('Enter you name:');
+        streams.users[username] = [];
 
         getTweets = function () {
           var i;
@@ -57,7 +65,7 @@
             tweet_history.push($tweet_li);
             stream_index += 1;
 
-            if ($('.home_tweets li').length > 11) {
+            if ($('.home_tweets li').length > 14) {
               $('.home_tweets li').first().remove();
             }
           }
@@ -88,6 +96,38 @@
             }
           }
         }
+
+        $('.home_tweets_container').prepend('<b>New tweet:</b><input class="tweet_box"' +
+          'type="text" name="tweet"><input class="tweetsubmit" type="submit" value="Submit">');
+        $('.home_tweets_container').prepend('<p class="username"> User:  ' + username + '</p>');
+        
+        $('.tweet_box').focus();
+        
+        // DRY fail on the submit bindings below. I couldn't find a good way to do
+        // them without refactoring a lot of my code. 
+        $('.tweetsubmit').click(function () {
+          var tweet = {};
+          tweet.user = username;
+          tweet.message = $('.tweet_box').val();
+          tweet.created_at = moment().format('MMMM Do YYYY, h:mm:ss a');
+          streams.users[username].push(tweet);
+          streams.home.push(tweet);
+          $('.tweet_box').val('');
+        });
+
+        $('.tweet_box').keypress(function (event) {
+          var key = event.which;
+          var tweet;
+          if (key === 13) { 
+          tweet = {};
+          tweet.user = username;
+          tweet.message = $('.tweet_box').val();
+          tweet.created_at = moment().format('MMMM Do YYYY, h:mm:ss a');
+          streams.users[username].push(tweet);
+          streams.home.push(tweet);
+          $('.tweet_box').val('');
+          }
+        });
 
         getTweets();
 

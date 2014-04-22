@@ -19,17 +19,31 @@ body {
 	color: #00B060;
 }
 .content {
-  height: 600px;
+  height: 700px;
   width: 100%;
 }
 .tweet_container {
 	margin: 0 auto;
 	padding-top: 30px;
 	width: 960px;
+	height: 900px;
+}
+.username {
+	font-weight: bold;
+}
+.tweet_box {
+	width: 200px;
+	margin-left: 10px;
+}
+.tweetsubmit {
+	margin-left: 10px;
 }
 .home_tweets_container {
 	width: 460px;
 	float: left;
+}
+.home_tweets {
+	height: 700;
 }
 .user_tweets_container {
 	width: 460px;
@@ -37,7 +51,7 @@ body {
 	margin-left: 40px;
 }
 .user_tweets {
-	height: 430px;
+	height: 700px;
 	overflow: scroll;
 }
 .user_stream_title {
