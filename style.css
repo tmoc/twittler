@@ -37,6 +37,8 @@ body {
 }
 .tweetsubmit {
 	margin-left: 10px;
+	cursor: pointer;
+  cursor: hand;
 }
 .home_tweets_container {
 	width: 460px;
